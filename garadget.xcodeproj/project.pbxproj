@@ -743,6 +743,7 @@
 					"$(PROJECT_DIR)/aws-ios-sdk-2/frameworks",
 				);
 				INFOPLIST_FILE = garadget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.synapticswitch.garadget;
@@ -771,6 +772,7 @@
 					"$(PROJECT_DIR)/aws-ios-sdk-2/frameworks",
 				);
 				INFOPLIST_FILE = garadget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.synapticswitch.garadget;
 				PRODUCT_NAME = "$(TARGET_NAME)";

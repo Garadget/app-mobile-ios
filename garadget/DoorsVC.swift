@@ -214,10 +214,14 @@ class DoorsVC: UIViewController, SparkSetupMainControllerDelegate
             {                
                 if let devices = sparkDevices as? [SparkDevice]
                 {
+                    let screenSize: CGRect = UIScreen.mainScreen().bounds
+                    let screenWidth = screenSize.width
+                    let screenHeight = screenSize.height
+                    
                     var index = 0
                     var xPos = CGFloat()
                     let padding = CGFloat(75.0)
-                    let startingX = CGFloat(385.0 - (padding*CGFloat(devices.count-1)))
+                    let startingX = CGFloat( (screenWidth * 0.95) - (padding*CGFloat(devices.count-1)))
                     
                     for device in devices
                     {
@@ -229,7 +233,7 @@ class DoorsVC: UIViewController, SparkSetupMainControllerDelegate
                             //Create the UIButton
                             let button   = UIButton()
                             button.adjustsImageWhenHighlighted = false
-                            button.frame = CGRectMake(xPos, 425, 50, 50)
+                            button.frame = CGRectMake(xPos, screenHeight * 0.6, 50, 50)
                             button.setImage( UIImage(named: "door-01.png"), forState: UIControlState.Normal)
                             button.setTitle(device.name, forState: UIControlState.Normal)
                             button.addTarget(self, action: "doorSelectedAction:", forControlEvents: UIControlEvents.TouchUpInside)

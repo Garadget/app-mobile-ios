@@ -272,11 +272,11 @@
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="c2w-RQ-Vo9">
-                            <rect key="frame" x="116" y="5.5" width="368" height="33"/>
+                            <rect key="frame" x="77" y="5.5" width="503" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Doors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhp-eJ-X3d">
-                                    <rect key="frame" x="190" y="-10" width="129" height="53"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhp-eJ-X3d">
+                                    <rect key="frame" x="75" y="-2" width="79.5" height="36"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -284,8 +284,8 @@
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="Uhp-eJ-X3d" firstAttribute="centerX" secondItem="c2w-RQ-Vo9" secondAttribute="centerX" id="t9i-oA-l4x"/>
-                                <constraint firstItem="Uhp-eJ-X3d" firstAttribute="centerY" secondItem="c2w-RQ-Vo9" secondAttribute="centerY" id="yde-BN-eVZ"/>
+                                <constraint firstItem="Uhp-eJ-X3d" firstAttribute="centerY" secondItem="c2w-RQ-Vo9" secondAttribute="centerY" id="4Sd-ha-sxv"/>
+                                <constraint firstItem="Uhp-eJ-X3d" firstAttribute="leading" secondItem="c2w-RQ-Vo9" secondAttribute="leading" constant="75" id="xfe-eJ-ufI"/>
                             </constraints>
                         </view>
                     </navigationItem>
@@ -580,11 +580,11 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="West - Home" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9mc-oX-gxV">
-                                                    <rect key="frame" x="344" y="7" width="233" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="West - Home" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9mc-oX-gxV">
+                                                    <rect key="frame" x="402" y="8" width="175" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="En0-wo-U2S"/>
-                                                        <constraint firstAttribute="width" constant="233" id="q1J-sn-mzY"/>
+                                                        <constraint firstAttribute="width" constant="175" id="q1J-sn-mzY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -882,9 +882,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOL-S8-Pdh">
-                                                    <rect key="frame" x="405" y="11" width="172" height="33"/>
+                                                    <rect key="frame" x="442" y="11" width="135" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="172" id="fmK-5g-KB1"/>
+                                                        <constraint firstAttribute="width" constant="135" id="fmK-5g-KB1"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="Every 2 Seconds">
@@ -915,9 +915,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q04-Gf-oqj">
-                                                    <rect key="frame" x="449" y="11" width="128" height="33"/>
+                                                    <rect key="frame" x="442" y="11" width="135" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="128" id="ckE-dS-5hu"/>
+                                                        <constraint firstAttribute="width" constant="135" id="ckE-dS-5hu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="3">
@@ -948,9 +948,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-g9-ksP">
-                                                    <rect key="frame" x="449" y="11" width="128" height="33"/>
+                                                    <rect key="frame" x="477" y="11" width="100" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="128" id="Gsb-uO-Kfq"/>
+                                                        <constraint firstAttribute="width" constant="100" id="Gsb-uO-Kfq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="25%">
@@ -985,9 +985,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNv-ey-bdo">
-                                                    <rect key="frame" x="449" y="5" width="128" height="33"/>
+                                                    <rect key="frame" x="477" y="5" width="100" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="128" id="GsO-HZ-0Lc"/>
+                                                        <constraint firstAttribute="width" constant="100" id="GsO-HZ-0Lc"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="10 Seconds">
@@ -1018,9 +1018,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vK-YT-fv3">
-                                                    <rect key="frame" x="449" y="5" width="128" height="33"/>
+                                                    <rect key="frame" x="477" y="5" width="100" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="128" id="xPf-0h-bcy"/>
+                                                        <constraint firstAttribute="width" constant="100" id="xPf-0h-bcy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="0.3 Seconds">
@@ -1057,9 +1057,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cnw-Fh-qZw">
-                                                    <rect key="frame" x="449" y="5" width="128" height="33"/>
+                                                    <rect key="frame" x="477" y="5" width="100" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="128" id="dk8-8A-ST9"/>
+                                                        <constraint firstAttribute="width" constant="100" id="dk8-8A-ST9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="1.0 Seconds">
@@ -1098,7 +1098,7 @@
                             <rect key="frame" x="180" y="5.5" width="240" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDu-QK-Xaw">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDu-QK-Xaw">
                                     <rect key="frame" x="26" y="-5" width="188" height="38"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1106,6 +1106,10 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="EDu-QK-Xaw" firstAttribute="centerX" secondItem="Mmm-hH-fKQ" secondAttribute="centerX" id="5c8-Oz-ZCa"/>
+                                <constraint firstItem="EDu-QK-Xaw" firstAttribute="centerY" secondItem="Mmm-hH-fKQ" secondAttribute="centerY" id="x1x-nb-Jjn"/>
+                            </constraints>
                         </view>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qOM-vx-vDn">
@@ -1738,7 +1742,7 @@
                                                     <rect key="frame" x="344" y="7" width="233" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="WAX-Rg-X6n"/>
-                                                        <constraint firstAttribute="width" constant="233" id="glE-EV-3A0"/>
+                                                        <constraint firstAttribute="width" constant="133" id="glE-EV-3A0"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1750,6 +1754,11 @@
                                                 <constraint firstItem="Eq1-gX-Mv5" firstAttribute="top" secondItem="ifC-34-ZAM" secondAttribute="topMargin" id="skv-dH-QN4"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Eq1-gX-Mv5" secondAttribute="trailing" constant="15" id="uD0-nR-R4o"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="HhQ-d8-qGJ"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zne-cf-G88">
