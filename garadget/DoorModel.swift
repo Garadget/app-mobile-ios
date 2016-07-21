@@ -408,10 +408,46 @@ class DoorModel : NSObject
                         if valArr[0] == "status"
                         {
                             self.m_strStatus = valArr[1]
+
+                            // OMEGA
+//                            if( self.m_pDoorStatusUILabel != nil )
+//                            {
+//                                self.m_pDoorStatusUILabel!.text = valArr[1]
+//                            }
                             
-                            if( self.m_pDoorStatusUILabel != nil )
+                            if( self.m_strStatus == "open" || self.m_strStatus == "opening" )
                             {
-                                self.m_pDoorStatusUILabel!.text = valArr[1]
+                                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                                    
+                                    self.m_pDoorUIButton!.imageView!.stopAnimating()
+                                    self.m_pDoorUIButton!.setImage(UIImage(	named: "door-15.png"), forState: .Normal)
+                                    self.m_pDoorStatusUILabel!.text = "open"
+                                    self.m_strStatus = "open"
+                                    
+                                    self.m_pProgressBGShape!.hidden = true
+                                    self.m_pProgressBarShape!.hidden = true
+                                    self.m_pProgressBarLabel!.hidden = true
+                                    self.m_dProgressMod = 0.0
+                                    
+                                    self.m_pProgressTimer?.invalidate()
+                                }
+                            }
+                            else if( self.m_strStatus == "closed" || self.m_strStatus == "closing" )
+                            {
+                                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                                    
+                                    self.m_pDoorUIButton!.imageView!.stopAnimating()
+                                    self.m_pDoorUIButton!.setImage(UIImage(	named: "door-01.png"), forState: .Normal)
+                                    self.m_pDoorStatusUILabel!.text = "closed"
+                                    self.m_strStatus = "closed"
+                                    
+                                    self.m_pProgressBGShape!.hidden = true
+                                    self.m_pProgressBarShape!.hidden = true
+                                    self.m_pProgressBarLabel!.hidden = true
+                                    self.m_dProgressMod = 0.0
+                                    
+                                    self.m_pProgressTimer?.invalidate()
+                                }
                             }
                         }
                         //.. Door time
@@ -421,7 +457,7 @@ class DoorModel : NSObject
                             
                             if( self.m_pDoorStatusUILabel != nil )
                             {
-                                self.m_pDoorStatusUILabel!.text = self.m_pDoorStatusUILabel!.text! + " " + valArr[1]
+                                self.m_pDoorStatusUILabel!.text = self.m_strStatus! + " " + valArr[1]
                             }
                         }
                         //.. Door sensor
@@ -870,12 +906,12 @@ class DoorModel : NSObject
             
             if (!gotFirstEvent)
             {
-                //print("Got first event: "+event!.data!)
+                print("Got first event: "+event!.data!)
                 gotFirstEvent = true
             }
             else
             {
-                //print("Got event: "+event!.data!)
+                print("Got event: "+event!.data!)
             }
             
             if( event!.data! == "open" )

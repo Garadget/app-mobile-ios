@@ -117,7 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(application: UIApplication)
+    {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
@@ -126,6 +127,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         locationManager.stopMonitoringSignificantLocationChanges()
+        
+        //SM: Update the door status each time the app enters the foreground
+        if( m_pDoorVC != nil )
+        {
+            for door in (m_pDoorVC?.doorDeviceList)!
+            {
+                door?.getDoorStatus()
+            }
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -242,6 +252,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             {
                 let pCurrentDoor  = (m_pDoorVC!.doorDeviceList[i]!) as? DoorModel
                 
+                pCurrentDoor?.getDoorStatus()
                 pCurrentDoor?.CheckForUserLocationNotification()
             }
         }
