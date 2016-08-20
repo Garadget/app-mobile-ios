@@ -352,7 +352,8 @@ class DoorsVC: UIViewController, SparkSetupMainControllerDelegate
         
         if( device.connected == true)
         {
-            pDoorModel.SetupEventHandler()
+            pDoorModel.SetupEventHandlerForState()
+            // OMEGA pDoorModel.SetupEventHandlerForTime()
         }
         
         self.doorDeviceList.append(pDoorModel)

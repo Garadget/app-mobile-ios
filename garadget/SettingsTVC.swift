@@ -10,6 +10,8 @@ class SettingsTVC: UITableViewController, UITextFieldDelegate, UIPickerViewDeleg
 {
     var m_pDoorModel : DoorModel?
     
+    var m_pUpdateUITimer : NSTimer?
+    
     // Door Outlets
     @IBOutlet weak var m_visible_outlet: UISwitch!
     
@@ -66,8 +68,8 @@ class SettingsTVC: UITableViewController, UITextFieldDelegate, UIPickerViewDeleg
     @IBOutlet weak var m_door_motion_outlet: UILabel!
     @IBOutlet weak var m_door_motion_button: UIButton!
     var m_iDoorMotionIndex : Int = 0
-    let m_arrDoorMotionLabels = ["5 Seconds", "6 Seconds", "7 Seconds", "8 Seconds", "9 Seconds", "10 Seconds", "11 Seconds", "12 Seconds", "13 Seconds", "14 Seconds", "15 Seconds"]
-    let m_arrDoorMotionVars = [5.0, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    let m_arrDoorMotionLabels = ["5 Seconds", "6 Seconds", "7 Seconds", "8 Seconds", "9 Seconds", "10 Seconds", "11 Seconds", "12 Seconds", "13 Seconds", "14 Seconds", "15 Seconds", "16 Seconds", "17 Seconds", "18 Seconds", "19 Seconds", "20 Seconds", "21 Seconds", "22 Seconds", "23 Seconds", "24 Seconds", "25 Seconds", "26 Seconds", "27 Seconds", "28 Seconds", "29 Seconds", "30 Seconds"]
+    let m_arrDoorMotionVars = [5.0, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
     
     @IBAction func doorMotionAction(sender: AnyObject)
     {
@@ -169,16 +171,46 @@ class SettingsTVC: UITableViewController, UITextFieldDelegate, UIPickerViewDeleg
         m_name_input_outlet.delegate = self
         
         self.refreshControl?.addTarget(self, action: #selector(SettingsTVC.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        
+        m_pUpdateUITimer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector:#selector(SettingsTVC.updateCoreSettingsDataFromServer), userInfo: nil, repeats: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
+        if(m_pUpdateUITimer != nil )
+        {
+            m_pUpdateUITimer?.invalidate()
+        }
+        
         if (m_pDoorModel?.m_bConnected == true)
         {
             self.SaveSettingsToDevice(sender!)
         }
+    }
+    
+    func updateCoreSettingsDataFromServer()
+    {
+        m_sensor_reflection.text = m_pDoorModel?.m_strSensorRate;
+        
+        let fWifiStrength = Double((m_pDoorModel?.m_strWifiSignal)!)
+        var s_strength : String
+        
+        if (fWifiStrength <= -85)
+        {
+            s_strength = "poor"
+        }
+        else if (fWifiStrength <= -60)
+        {
+            s_strength = "good"
+        }
+        else
+        {
+            s_strength = "excellent"
+        }
+        m_wifi_strength_outlet.text = s_strength
+        m_wifi_strength_outlet.text = m_wifi_strength_outlet.text! + " (" + (m_pDoorModel?.m_strWifiSignal)! + "dB)"
     }
     
     @IBAction func scanPeriodAction(sender: AnyObject)
@@ -385,6 +417,9 @@ class SettingsTVC: UITableViewController, UITextFieldDelegate, UIPickerViewDeleg
                     self.m_sensor_threshold_button.layer.cornerRadius = 2;
                     self.m_sensor_threshold_button.layer.borderWidth = 1;
                     self.m_sensor_threshold_button.layer.borderColor = UIColor(white: 0.0, alpha: borderAlpha).CGColor
+                    
+                    // Sensor Reflection
+                    m_sensor_reflection.text = m_pDoorModel?.m_strSensorRate;
                     
                     ///////////////////////////////////////
                     // Door Motion

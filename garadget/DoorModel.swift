@@ -118,7 +118,8 @@ class DoorModel : NSObject
             {
                 //print("Open door message sent")
                 
-                self.m_pDoorStatusUILabel!.text = "opening"
+                self.m_strStatus = "opening"
+                self.m_pDoorStatusUILabel!.text = "opening" + " 0s"
             }
         }
         
@@ -135,7 +136,8 @@ class DoorModel : NSObject
             {
                 //print("Closed door message sent")
                 
-                self.m_pDoorStatusUILabel!.text = "closing"
+                self.m_strStatus = "closing"
+                self.m_pDoorStatusUILabel!.text = "closing" + " 0s"
             }
         }
         
@@ -390,7 +392,7 @@ class DoorModel : NSObject
         defaults.setBool(p_bEnabled, forKey: self.m_strName! + "doorNotifyOnDepartureEnabled")
     }
     
-    func getDoorStatus()
+    func getDoorStatus(p_bCheckForLocalNotifications : Bool = false)
     {
         if self.m_pDevice!.connected
         {
@@ -408,20 +410,14 @@ class DoorModel : NSObject
                         if valArr[0] == "status"
                         {
                             self.m_strStatus = valArr[1]
-
-                            // OMEGA
-//                            if( self.m_pDoorStatusUILabel != nil )
-//                            {
-//                                self.m_pDoorStatusUILabel!.text = valArr[1]
-//                            }
                             
-                            if( self.m_strStatus == "open" || self.m_strStatus == "opening" )
+                            if( self.m_strStatus == "open" /*|| self.m_strStatus == "opening"*/ )
                             {
                                 dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                                     
                                     self.m_pDoorUIButton!.imageView!.stopAnimating()
                                     self.m_pDoorUIButton!.setImage(UIImage(	named: "door-15.png"), forState: .Normal)
-                                    self.m_pDoorStatusUILabel!.text = "open"
+                                    self.m_pDoorStatusUILabel!.text = "open" + " " + self.m_strStatusTime!
                                     self.m_strStatus = "open"
                                     
                                     self.m_pProgressBGShape!.hidden = true
@@ -432,13 +428,13 @@ class DoorModel : NSObject
                                     self.m_pProgressTimer?.invalidate()
                                 }
                             }
-                            else if( self.m_strStatus == "closed" || self.m_strStatus == "closing" )
+                            else if( self.m_strStatus == "closed" /*|| self.m_strStatus == "closing"*/ )
                             {
                                 dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                                     
                                     self.m_pDoorUIButton!.imageView!.stopAnimating()
                                     self.m_pDoorUIButton!.setImage(UIImage(	named: "door-01.png"), forState: .Normal)
-                                    self.m_pDoorStatusUILabel!.text = "closed"
+                                    self.m_pDoorStatusUILabel!.text = "closed" + " " + self.m_strStatusTime!
                                     self.m_strStatus = "closed"
                                     
                                     self.m_pProgressBGShape!.hidden = true
@@ -448,6 +444,11 @@ class DoorModel : NSObject
                                     
                                     self.m_pProgressTimer?.invalidate()
                                 }
+                            }
+                            
+                            if( p_bCheckForLocalNotifications == true && self.m_strStatus! != "closed")
+                            {
+                                self.CheckForUserLocationNotification()
                             }
                         }
                         //.. Door time
@@ -469,6 +470,51 @@ class DoorModel : NSObject
                         if valArr[0] == "signal"
                         {
                             self.m_strWifiSignal = valArr[1]
+                            
+                            self.UpdateStatusUI(Int(valArr[1])!)
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    func getDoorTime()
+    {
+        if self.m_pDevice!.connected
+        {
+            self.m_pDevice!.getVariable("doorStatus", completion: { (result:AnyObject?, error:NSError?) -> Void in
+                if let _=error {
+                    print("Failed reading doorStatus from device")
+                }
+                else
+                {
+                    let resultArr = result!.componentsSeparatedByString("|")
+                    for val in resultArr
+                    {
+                        let valArr = val.componentsSeparatedByString("=")
+                        
+                        //.. Door time
+                        if valArr[0] == "time"
+                        {
+                            self.m_strStatusTime = valArr[1]
+                            
+                            if( self.m_pDoorStatusUILabel != nil )
+                            {
+                                self.m_pDoorStatusUILabel!.text = self.m_strStatus! + " " + valArr[1]
+                            }
+                        }
+                        //.. Door sensor
+                        if valArr[0] == "sensor"
+                        {
+                            self.m_strSensorRate = valArr[1]
+                        }
+                        //.. Door Signal
+                        if valArr[0] == "signal"
+                        {
+                            self.m_strWifiSignal = valArr[1]
+                            
+                            self.UpdateStatusUI(Int(valArr[1])!)
                         }
                     }
                 }
@@ -489,6 +535,9 @@ class DoorModel : NSObject
             let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             pAppDelegate.AuthorizeLocationTracking()
         }
+        
+        
+        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector:#selector(DoorModel.getDoorTime), userInfo: nil, repeats: true)
     }
     
     func loadSettingsFromDevice()
@@ -524,7 +573,7 @@ class DoorModel : NSObject
                             
                             if( self.m_pDoorStatusUILabel != nil )
                             {
-                                self.m_pDoorStatusUILabel!.text = valArr[1]
+                                self.m_pDoorStatusUILabel!.text = valArr[1] + " " + self.m_strStatusTime!
                             }
                             
                             if self.m_strStatus == "open"
@@ -543,7 +592,7 @@ class DoorModel : NSObject
                             
                             if( self.m_pDoorStatusUILabel != nil )
                             {
-                                self.m_pDoorStatusUILabel!.text = self.m_pDoorStatusUILabel!.text! + " " + valArr[1]
+                                self.m_pDoorStatusUILabel!.text = self.m_strStatus! + " " + valArr[1]
                             }
                         }
                         //.. Door sensor
@@ -766,6 +815,8 @@ class DoorModel : NSObject
 //                                    {
 //                                        
 //                                    }
+                                    
+                                    self.CheckAlertSettingsStatus()
                                 }
                                 else if( valArr[0] == "tzo" )
                                 {
@@ -895,7 +946,7 @@ class DoorModel : NSObject
         }
     }
     
-    func SetupEventHandler()
+    func SetupEventHandlerForState()
     {
         let myPhoton = self.m_pDevice
         
@@ -920,7 +971,7 @@ class DoorModel : NSObject
                     
                     self.m_pDoorUIButton!.imageView!.stopAnimating()
                     self.m_pDoorUIButton!.setImage(UIImage(	named: "door-15.png"), forState: .Normal)
-                    self.m_pDoorStatusUILabel!.text = "open"
+                    self.m_pDoorStatusUILabel!.text = "open" + " " + self.m_strStatusTime!
                     self.m_strStatus = "open"
                     
                     self.m_pProgressBGShape!.hidden = true
@@ -937,7 +988,7 @@ class DoorModel : NSObject
                     
                     self.m_pDoorUIButton!.imageView!.stopAnimating()
                     self.m_pDoorUIButton!.setImage(UIImage(	named: "door-01.png"), forState: .Normal)
-                    self.m_pDoorStatusUILabel!.text = "closed"
+                    self.m_pDoorStatusUILabel!.text = "closed" + " " + self.m_strStatusTime!
                     self.m_strStatus = "closed"
                     
                     self.m_pProgressBGShape!.hidden = true
@@ -954,6 +1005,25 @@ class DoorModel : NSObject
             }
         });
     }
+    
+//    func SetupEventHandlerForTime()
+//    {
+//        let myPhoton = self.m_pDevice
+//        
+//        //print("subscribing to event...");
+//        
+//        let myEventId = myPhoton!.subscribeToEventsWithPrefix("time", handler: { (event: SparkEvent?, error:NSError?) -> Void in
+//            
+//            self.m_strStatusTime = event!.data!
+//            
+//            print("EventHandler : Time Event : " + event!.data!)
+//            
+//            if( self.m_pDoorStatusUILabel != nil )
+//            {
+//                self.m_pDoorStatusUILabel!.text = self.m_pDoorStatusUILabel!.text! + " " + event!.data!
+//            }
+//        });
+//    }
     
     func renameDevice (p_strName : String)
     {
@@ -1035,6 +1105,26 @@ class DoorModel : NSObject
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func CheckAlertSettingsStatus()
+    {
+        if( self.m_bNotifyOnRebootEnabled == false && self.m_bNotifyOnOpenEnabled == false && self.m_bNotifyOnCloseEnabled == false && self.m_bNotifyWhenOnlineEnabled == false && self.m_bNotifyOnStoppedEnabled == false && self.m_bNotifyOnDisconnectEnabled == false)
+        {
+            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if(pAppDelegate.m_strAPNSToken != nil)
+            {
+                self.PostDisableDeviceAlertsToWebserver(pAppDelegate.m_strAPNSToken!)
+            }
+        }
+        else
+        {
+            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if(pAppDelegate.m_strAPNSToken != nil)
+            {
+                self.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
             }
         }
     }

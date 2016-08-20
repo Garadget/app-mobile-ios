@@ -44,10 +44,6 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
     
     @IBOutlet weak var night_timezone_button_outlet: UIButton!
     
-//    let m_arrTimezoneLabels = ["(GMT-12:00) International Date Line West", "(GMT-11:00) Midway Island, Samoa", "(GMT-10:00) Hawaii", "(GMT-09:00 +DST) Alaska", "(GMT-08:00 +DST) Pacific Time (US & Canada)", "(GMT-08:00 +DST) Tijuana, Baja California", "(GMT-07:00 +DST) Arizona", "(GMT-07:00 +DST) Chihuahua, La Paz Mazatlan", "(GMT-07:00 +DST) Mountain Time (US & Canada)", "(GMT-06:00) Central America", "(GMT-06:00 +DST) Central Time (US & Canada)", "(GMT-06:00) Guadalajara, Mexico City, Monterrey", "(GMT-06:00) Saskatchewan", "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", "(GMT-05:00 +DST) Eastern Time (US & Canada)", "(GMT-05:00 +DST) Indiana (East)", "(GMT-04:00 +DST) Atlantic Time (Canada)", "(GMT-04:00) Caracas, La Paz", "(GMT-04:00) Manaus", "(GMT-04:00) Santiago", "(GMT-03:30) Newfoundland", "(GMT-03:00) Brasilia", "(GMT-03:00) Buenos Aires, Georgetown", "(GMT-03:00) Greenland", "(GMT-03:00) Montevideo", "(GMT-02:00) Mid-Atlantic", "(GMT-01:00) Cape Verde Is.", "(GMT-00:00) Monrovia, Reykjavik", "(GMT-00:00 +DST) Dublin, Edinburgh, Lisbon, Longon", "(GMT+01:00 + DST) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", "(GMT+01:00 + DST) Belgrade, Bratislava, Budapest, Ljubljana, Prague", "(GMT+01:00 + DST) Brussels, Copenhagen, Madrid, Paris", "(GMT+01:00 + DST) Sarajevo, Skopje, Warsaw, Zagreb", "(GMT+01:00) West Central Africa", "(GMT+02:00 + DST) Amman", "(GMT+02:00 + DST) Athens, Bucharest, Istanbul", "(GMT+02:00 + DST) Cairo", "(GMT+02:00) Harare, Pretoria", "(GMT+02:00 + DST) Helsinki, Kyiv, Riga, Tallin", "(GMT+02:00 + DST) Jerusalem", "(GMT+02:00 + DST) Windhoek", "(GMT+03:00) Kuwait, Riyadh, Baghdad", "(GMT+03:00) Moscow, St. Petersburg, Volgograd", "(GMT+03:30) Tehran", "(GMT+04:00) Abu Dhabi, Muscat, Tbilsi", "(GMT+04:30) Kabul", "(GMT+05:00) Islamabad, Karachi, Tashkent", "(GMT+05:30) Chennai, Kokata, Mumbai, New Delhi", "(GMT+06:00) Almaty, Novosibirsk", "(GMT+07:00) Bangkok, Hanoi, Jakarta", "(GMT+07:00) Krasnoyarsk", "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi", "(GMT+08:00) Kuala Lumpur, Singapore", "(GMT+08:00) Irkutsk, Perth, Taipei, Ulaan Bataar", "(GMT+09:00) Osaka, Sapporo, Seoul, Tokyo, Yakutsk", "(GMT+09:30) Adelaide", "(GMT+09:30) Darwin", "(GMT+10:00) Brisbane", "(GMT+10:00) Canberra, Hobart, Melbourne, Sydney", "(GMT+10:00) Guam, Port Moresby, Vladivostok", "(GMT+11:00) Magadan, Solomon Is., New Caledonia", "(GMT+12:00) Auckland, Wllington", "(GMT+12:00) Fiji, Kamchatka, Marshall Is."]
-//    
-//    let m_arrTimezoneValues = [ -12, -11, -10, -9, -8, -8, -7, -7, -7, -6, -6, -6, -6, -5, -5, -5, -4, -4, -4, -4, -3.5, -3, -3, -3, -3, -2, -1, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 7, 8, 8, 8, 9, 9.5, 9.5, 10, 10, 10, 11, 12, 12 ]
-
     let m_arrTimezoneLabels = ["(GMT-12:00) International Date Line West", "(GMT-11:00) Midway Island, Samoa", "(GMT-10:00) Hawaii", "(GMT-09:00 +DST) Alaska", "(GMT-08:00 +DST) Pacific Time (US & Canada)", "(GMT-07:00 +DST) Mountain Time (US & Canada)", "(GMT-06:00 +DST) Central Time (US & Canada)", "(GMT-05:00 +DST) Eastern Time (US & Canada)", "(GMT-04:00 +DST) Atlantic Time (Canada)", "(GMT-03:30) Newfoundland", "(GMT-02:00) Mid-Atlantic", "(GMT-01:00) Cape Verde Is.", "(GMT-00:00) Monrovia, Reykjavik", "(GMT-00:00 +DST) Dublin, Edinburgh, Lisbon, Longon", "(GMT+01:00 + DST) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", "(GMT+01:00 + DST) Belgrade, Bratislava, Budapest, Ljubljana, Prague", "(GMT+01:00 + DST) Brussels, Copenhagen, Madrid, Paris", "(GMT+01:00 + DST) Sarajevo, Skopje, Warsaw, Zagreb", "(GMT+01:00) West Central Africa", "(GMT+02:00 + DST) Amman", "(GMT+02:00 + DST) Athens, Bucharest, Istanbul", "(GMT+02:00 + DST) Cairo", "(GMT+02:00) Harare, Pretoria", "(GMT+02:00 + DST) Helsinki, Kyiv, Riga, Tallin", "(GMT+02:00 + DST) Jerusalem", "(GMT+02:00 + DST) Windhoek", "(GMT+03:00) Kuwait, Riyadh, Baghdad", "(GMT+03:00) Moscow, St. Petersburg, Volgograd", "(GMT+03:30) Tehran", "(GMT+04:00) Abu Dhabi, Muscat, Tbilsi", "(GMT+04:30) Kabul", "(GMT+05:00) Islamabad, Karachi, Tashkent", "(GMT+05:30) Chennai, Kokata, Mumbai, New Delhi", "(GMT+06:00) Almaty, Novosibirsk", "(GMT+07:00) Bangkok, Hanoi, Jakarta", "(GMT+07:00) Krasnoyarsk", "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi", "(GMT+08:00) Kuala Lumpur, Singapore", "(GMT+08:00) Irkutsk, Perth, Taipei, Ulaan Bataar", "(GMT+09:00) Osaka, Sapporo, Seoul, Tokyo, Yakutsk", "(GMT+09:30) Adelaide", "(GMT+09:30) Darwin", "(GMT+10:00) Brisbane", "(GMT+10:00) Canberra, Hobart, Melbourne, Sydney", "(GMT+10:00) Guam, Port Moresby, Vladivostok", "(GMT+11:00) Magadan, Solomon Is., New Caledonia", "(GMT+12:00) Auckland, Wllington", "(GMT+12:00) Fiji, Kamchatka, Marshall Is."]
     
     let m_arrTimezoneValues = [ -12, -11, -10, -9, -8, -7, -6, -5, -4, -3.5, -3, -2, -1, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 7, 8, 8, 8, 9, 9.5, 9.5, 10, 10, 10, 11, 12, 12 ]
@@ -75,6 +71,8 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
     var m_bFirstTimeLocated : Bool! = false
     
     var m_pDoorModel : DoorModel!
+    
+    var m_pUserLocation : MKUserLocation! = nil
     
     func refresh(sender:AnyObject)
     {
@@ -199,32 +197,7 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
                 
                 let fOffset = Double( (self.m_pDoorModel!.m_pNightAlertTimeZone!.secondsFromGMT / 60 / 60) - 1)
             
-                var iIndex = 0
-                
-                //            var arrTimezonesAvailable = Array(NSTimeZone.abbreviationDictionary().values)
-                //            let arrTimezonesAbbreviations = Array(NSTimeZone.abbreviationDictionary().keys)
-
-//                for pAbbreviation in arrTimezonesAbbreviations
-//                {
-//                    let timezone = NSTimeZone(abbreviation: pAbbreviation)
-//                    
-//                    let fGMTOffset = Double( (timezone!.secondsFromGMT / 60 / 60) - 1)
-//                    
-//                    if( fOffset == fGMTOffset )
-//                    {
-//                        self.m_iNightAlertTimeZoneIndex = iIndex
-//                        break
-//                    }
-//                    else if( m_pDoorModel!.m_pNightAlertTimeZone.abbreviation! == pAbbreviation )
-//                    {
-//                        self.m_iNightAlertTimeZoneIndex = iIndex
-//                        break
-//                    }
-//                    
-//                    iIndex += 1
-//                }
-                
-                iIndex = 0
+                var iIndex = 1
                 for value in m_arrTimezoneValues
                 {
                     if( value == fOffset )
@@ -238,13 +211,6 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
                     
                     iIndex += 1
                 }
-                
-//                if( self.m_iNightAlertTimeZoneIndex < arrTimezonesAvailable.count )
-//                {
-//                    let strTimezoneLabel = arrTimezonesAvailable[self.m_iNightAlertTimeZoneIndex] + " (" + self.m_pDoorModel!.m_pNightAlertTimeZone.abbreviation! + ")"
-//                
-//                    night_timezone_button_outlet.setTitle(strTimezoneLabel, forState: UIControlState.Normal)
-//                }
             }
             ///////////////////////////////////////////////////////////////////////////////////////////////////////
             
@@ -295,19 +261,13 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
         if( notify_on_reboot_outlet.on )
         {
             m_pDoorModel?.ToggleRebootAlerts(true)
-            
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
         }
         else
         {
             m_pDoorModel?.ToggleRebootAlerts(false)
-            
-            self.CheckAlertSettingsStatus()
         }
+        
+        self.m_pDoorModel?.CheckAlertSettingsStatus()
     }
     
     @IBAction func enableOnlineAlertAction(sender: AnyObject)
@@ -315,19 +275,13 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
         if( notify_on_online_outlet.on )
         {
             m_pDoorModel?.ToggleOnlineAlerts(true)
-            
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
         }
         else
         {
             m_pDoorModel?.ToggleOnlineAlerts(false)
-            
-            self.CheckAlertSettingsStatus()
         }
+        
+        self.m_pDoorModel?.CheckAlertSettingsStatus()
     }
     
     @IBAction func enableOpenAlertAction(sender: AnyObject)
@@ -335,19 +289,13 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
         if( notify_on_open_outlet.on )
         {
             m_pDoorModel?.ToggleOpenAlerts(true)
-            
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
         }
         else
         {
             m_pDoorModel?.ToggleOpenAlerts(false)
-            
-            self.CheckAlertSettingsStatus()
         }
+        
+        self.m_pDoorModel?.CheckAlertSettingsStatus()
     }
     
     @IBAction func enableClosedAlertAction(sender: AnyObject)
@@ -355,19 +303,13 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
         if( notify_on_close_outlet.on )
         {
             m_pDoorModel?.ToggleClosedAlerts(true)
-            
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
         }
         else
         {
             m_pDoorModel?.ToggleClosedAlerts(false)
-            
-            self.CheckAlertSettingsStatus()
         }
+        
+        self.m_pDoorModel?.CheckAlertSettingsStatus()
     }
     
     @IBAction func enableStoppedAlertAction(sender: AnyObject)
@@ -375,19 +317,13 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
         if( notify_on_stopped_outlet.on )
         {
             m_pDoorModel?.ToggleStoppedAlerts(true)
-            
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
         }
         else
         {
             m_pDoorModel?.ToggleStoppedAlerts(false)
-            
-            self.CheckAlertSettingsStatus()
         }
+        
+        self.m_pDoorModel?.CheckAlertSettingsStatus()
     }
    
     @IBAction func enableOfflineAlertAction(sender: AnyObject)
@@ -395,32 +331,14 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
         if( notify_on_disconnect_outlet.on )
         {
             m_pDoorModel?.ToggleDisconnectedAlerts(true)
-            
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDoorDataToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
         }
         else
         {
             m_pDoorModel?.ToggleDisconnectedAlerts(false)
-            
-            self.CheckAlertSettingsStatus()
         }
-    }
-    
-    func CheckAlertSettingsStatus()
-    {
-        if( self.m_pDoorModel?.m_bNotifyOnRebootEnabled == false && self.m_pDoorModel?.m_bNotifyOnOpenEnabled == false && self.m_pDoorModel?.m_bNotifyOnCloseEnabled == false && self.m_pDoorModel?.m_bNotifyWhenOnlineEnabled == false && self.m_pDoorModel?.m_bNotifyOnStoppedEnabled == false && self.m_pDoorModel?.m_bNotifyOnDisconnectEnabled == false)
-        {
-            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if(pAppDelegate.m_strAPNSToken != nil)
-            {
-                self.m_pDoorModel!.PostDisableDeviceAlertsToWebserver(pAppDelegate.m_strAPNSToken!)
-            }
-        }
-    }
+        
+        self.m_pDoorModel?.CheckAlertSettingsStatus()
+    }        
     
     @IBAction func backButtonAction()
     {
@@ -574,13 +492,7 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
                 
                 self.m_pDoorModel!.SetNightAlertsTimeZone(pNewTimeZone)
             }
-
-            //let arrTimezonesAbbreviations = Array(NSTimeZone.abbreviationDictionary().keys)
-//            let arrTimezonesAbbreviations = Array(NSTimeZone.abbreviationDictionary().keys)
-//            let pNewTimeZone = NSTimeZone(abbreviation: arrTimezonesAbbreviations[self.m_iNightAlertTimeZoneIndex])!
-//            self.m_pDoorModel!.SetNightAlertsTimeZone(pNewTimeZone)
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////
-            
+          
             return
             }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -593,6 +505,21 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
             
             let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             pAppDelegate.AuthorizeLocationTracking()
+            
+            if(self.m_pUserLocation != nil)
+            {
+                let newLocation = CLLocation(latitude: self.m_pUserLocation.coordinate.latitude, longitude:self.m_pUserLocation.coordinate.longitude)
+                
+                m_pDoorModel?.EnabledLocationRadiusForDoor(true)
+                m_pDoorModel?.SetDoorLocation(newLocation)
+                
+                if( self.m_pDoorModel.m_dDepartureRadius == nil || self.m_pDoorModel.m_dDepartureRadius == 0.0 )
+                {
+                    m_pDoorModel?.SetDoorRadius(200)
+                }
+                
+                self.setDoorLocationOnMap(newLocation)
+            }
         }
         else
         {
@@ -702,7 +629,23 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
     func mapView(mapView: MKMapView,
         didUpdateUserLocation userLocation: MKUserLocation)
     {
-        if( self.m_bFirstTimeLocated == false && (self.m_pDoorModel.m_pDoorLocation == nil || self.m_pDoorModel.m_bNotifyOnDepartureEnabled == false) )
+        if( self.m_bFirstTimeLocated == false && (self.m_pDoorModel.m_pDoorLocation == nil && self.m_pDoorModel.m_bNotifyOnDepartureEnabled == true) )
+        {
+            m_bFirstTimeLocated = true
+            
+            let newLocation = CLLocation(latitude: userLocation.coordinate.latitude, longitude:userLocation.coordinate.longitude)
+            
+            m_pDoorModel?.EnabledLocationRadiusForDoor(true)
+            m_pDoorModel?.SetDoorLocation(newLocation)
+            
+            if( self.m_pDoorModel.m_dDepartureRadius == nil || self.m_pDoorModel.m_dDepartureRadius == 0.0 )
+            {
+                m_pDoorModel?.SetDoorRadius(200)
+            }
+            
+            self.setDoorLocationOnMap(newLocation)
+        }
+        else if( self.m_bFirstTimeLocated == false && (self.m_pDoorModel.m_pDoorLocation == nil || self.m_pDoorModel.m_bNotifyOnDepartureEnabled == false) )
         {
             m_bFirstTimeLocated = true
         
@@ -711,6 +654,8 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
             mapRegion.span = MKCoordinateSpanMake(0.02, 0.02);
             map_outlet.setRegion(mapRegion, animated: true)
         }
+        
+        self.m_pUserLocation = userLocation
     }
     
     func mapView(mapView: MKMapView,
@@ -875,7 +820,7 @@ class NotificationsTVC: UITableViewController, MKMapViewDelegate
             
             if( self.m_pDoorModel.m_dDepartureRadius == nil || self.m_pDoorModel.m_dDepartureRadius == 0.0 )
             {
-                m_pDoorModel?.SetDoorRadius(500)
+                m_pDoorModel?.SetDoorRadius(200)
             }
             
             self.setDoorLocationOnMap(newLocation)

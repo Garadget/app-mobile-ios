@@ -60,10 +60,20 @@ class SidePanelTVC: UITableViewController, SparkSetupMainControllerDelegate
     {
         if( menu[indexPath.row] == "Logout" )
         {
-            //self.revealViewController().revealToggle(nil)
+            //SM: Post a remove action to the webserver, removing all devices on this account from notifications when a user logs out.
+            let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if(pAppDelegate.m_strAPNSToken != nil)
+            {
+                let particleToken = SparkCloud.sharedInstance().accessToken
+                let params:NSDictionary = ["action" : "remove", "platform" : "apns", "subscriber" : pAppDelegate.m_strAPNSToken, "authtoken" : particleToken!]
+                
+                self.Post(params, url: "https://www.garadget.com/my/json/pn-signup.php")
+            }
             
+            //SM: Logout from Spark(particle) after posting remove device call to webserver
             SparkCloud.sharedInstance().logout()
             
+            // Access the DoorVC class and remove all door data
             let frontNavigationController = self.revealViewController().frontViewController as? UINavigationController
             if(frontNavigationController != nil)
             {
@@ -74,6 +84,7 @@ class SidePanelTVC: UITableViewController, SparkSetupMainControllerDelegate
                 }
             }
             
+            // Configure the login / register UI to display
             if let vc = SparkSetupMainController(authenticationOnly: true)
             {
                 SparkSetupCustomization.sharedInstance().deviceName = "Garadget"
@@ -121,5 +132,65 @@ class SidePanelTVC: UITableViewController, SparkSetupMainControllerDelegate
             print("Uknown setup error")
             
         }
+    }
+    
+    func Post(params : NSDictionary, url : String)
+    {
+        //print(params)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let session = NSURLSession.sharedSession()
+        request.HTTPMethod = "POST"
+        
+        let pAppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let strAction = String(params.valueForKey("action")!)
+        let strParticleID = String(params.valueForKey("authtoken")!)
+        
+        let bodyData = "action=" + strAction + "&platform=apns&subscriber=" + String(pAppDelegate.m_strAPNSToken) + "&authtoken=" + strParticleID
+        
+        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
+        
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        //request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            // handle error
+            guard error == nil else { return }
+            
+            //print("Response: \(response)")
+            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            //print("Body: \(strData)")
+            
+            let json: NSDictionary?
+            do {
+                json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
+            } catch let dataError {
+                // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
+                print(dataError)
+                let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print("Error could not parse JSON: '\(jsonStr)'")
+                // return or throw?
+                return
+            }
+            
+            
+            // The JSONObjectWithData constructor didn't return an error. But, we should still
+            // check and make sure that json has a value using optional binding.
+            if let parseJSON = json {
+                // Okay, the parsedJSON is here, let's get the value for 'success' out of it
+                let success = parseJSON["success"] as? Int
+                //print("Succes: \(success)")
+            }
+            else {
+                // Something went worng. Maybe the server isn't running?
+                let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print("Error could not parse JSON: \(jsonStr)")
+            }
+            
+        })
+        
+        task.resume()
     }
 }
